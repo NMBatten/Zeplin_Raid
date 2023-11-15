@@ -230,7 +230,7 @@ class BackGround:
                         gun.move( 0.65 )
                     
                 if gun.update():
-                    x, y = self._getTrajectory( gx, gun.getType() )
+                    x, y = self._getTrajectory( gx, gun )
                     b = gun.fire( x, y )
                     self.bullets.append(b)
             else:
@@ -257,15 +257,19 @@ class BackGround:
             elif gx < 0:
                 gun.move( self.widthval )
 
-    def _getTrajectory( self, xpos, guntype ):
+    def _getTrajectory( self, xpos, gun ):
 
         p = self.zep.getPos()
         px = p.getX()
         py = p.getY()
-        xval = py // 50
-        xdifference = px - xpos + self.x * 25 *(py//75)#improve current mobile guns accuracy
+        #print(px, py)
+        xval = (py / 5)//10
+        if gun.getType() == 'mobile':
+            xdifference = px - xpos + gun.getVelocity() + self.x * 25 *(py//75)#improve current mobile guns accuracy
+        else:
+            xdifference = px - xpos + self.x * 25 *(py//75)
         
-        yval = xdifference // 100
+        yval = (xdifference / 10) // 10
         return xval, yval
         
         

@@ -9,10 +9,12 @@ class Bullet:
         self.pro.draw( win )
         self.xvel = xvel
         self.yvel = yvel
+        self.timelapsed = 0
         
     def update( self ):
 
-        self.pro.move( self.yvel , self.xvel )
+        self.pro.move( self.yvel , self.xvel  - (0.001 * self.timelapsed) )
+        self.timelapsed += 1
         if self.pro.getCenter().getY() > 300:
             self.pro.undraw()
             return Point( 0 , 305 )

@@ -58,11 +58,17 @@ class SPAAG( Gun ):
         self.type = 'mobile'
         self.level = level
         self.cannon.draw( win )
+        self.velocity = 0
 
     def move( self, amount ):
 
         self.cannon.move( amount , 0 )
         self.pos = Point(self.pos.getX() + amount, self.pos.getY() )
+        self.velocity = amount
+
+    def getVelocity(self):
+
+        return self.velocity
         
         
         
